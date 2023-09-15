@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
   <record id="estate_property_type_action" model="ir.actions.act_window">
@@ -6,4 +6,33 @@
     <field name="res_model">estate.property.type</field>
     <field name="view_mode">tree,form</field>
   </record>
+
+    <record model="ir.ui.view" id="estate_property_type_view_form">
+      <field name="name">estate.property.type.form</field>
+      <field name="model">estate.property.type</field>
+      <field name="arch" type="xml">
+        <form string="Type">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="name" />
+              </h1>
+            </div>
+            <notebook>
+              <page string="Properties">
+                <group>
+                  <field name="property_ids" string="">
+                    <tree>
+                      <field name="name" />
+                      <field name="expected_price" />
+                      <field name="state" />
+                    </tree>
+                  </field>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
 </odoo>
