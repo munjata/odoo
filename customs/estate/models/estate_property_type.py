@@ -6,3 +6,7 @@ class PropertyType(models.Model):
     _description = "Property Type"
 
     name = fields.Char(string="Type", required=True)
+
+    _sql_constraints = [
+        ("name_unique", "UNIQUE(name)", "Tag name already exists!"),
+    ]
