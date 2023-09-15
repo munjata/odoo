@@ -6,3 +6,5 @@ class PropertyTag(models.Model):
     _description = "Property Tag"
 
     name = fields.Char(string="Tag", required=True)
+
+    _order = "name"
