@@ -30,3 +30,14 @@ class PropertyOffer(models.Model):
         for record in self:
             delta = record.date_deadline - fields.Date.today()
             record.validity = delta.days
+
+    def action_accept_offer(self):
+        for offer in self:
+            offer.status = "accepted"
+            # Set the property info
+            offer.property_id.buyer_id = offer.partner_id
+            offer.property_id.selling_price = offer.price
+
+    def action_refuse_offer(self):
+        for offer in self:
+            offer.status = "refused"
