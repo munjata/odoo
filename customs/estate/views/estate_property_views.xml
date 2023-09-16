@@ -10,7 +10,7 @@
     <field name="name">estate.property.tree</field>
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
-      <tree string="Property">
+      <tree decoration-success="state in ('received','accepted')" decoration-bf="state == 'accepted'" decoration-muted="state == 'sold'" >
         <field name="name" />
         <field name="postcode" />
         <field name="bedrooms" />
@@ -20,6 +20,7 @@
         <field name="expected_price" />
         <field name="selling_price" />
         <field name="date_availability" string="Available From" optional="hide" />
+        <field name="state" invisible="1"/>
       </tree>
     </field>
   </record>
