@@ -1,6 +1,7 @@
 from datetime import timedelta, datetime
 
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class PropertyOffer(models.Model):
