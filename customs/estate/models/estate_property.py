@@ -49,6 +49,7 @@ class EstateProperty(models.Model):
             ("received", " Received"),
             ("accepted", "Offer Accepted"),
             ("canceled", "Sold Canceled"),
+            ("sold", "Sold"),
         ],
     )
     buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
@@ -88,7 +89,7 @@ class EstateProperty(models.Model):
 
     def action_cancel_property(self):
         for property in self:
-            if property.state == "accepted":
+            if property.state == "sold":
                 raise UserError("Sold property can not be canceled")
             else:
                 property.state = "canceled"
@@ -99,7 +100,7 @@ class EstateProperty(models.Model):
             if property.state == "canceled":
                 raise UserError("Canceled property can not be sold")
             else:
-                property.state = "accepted"
+                property.state = "sold"
         return True
 
     @api.constrains("selling_price", "expected_price")
