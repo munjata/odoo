@@ -1,7 +1,8 @@
 from datetime import timedelta, datetime
 
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare
 
 
 class PropertyOffer(models.Model):
@@ -32,6 +33,19 @@ class PropertyOffer(models.Model):
                 record.date_deadline = self.create_date + timedelta(record.validity)
             except Exception as e:  # occurs on first creation
                 record.date_deadline = fields.Date.today() + timedelta(record.validity)
+
+    @api.model
+    def create(self, vals):
+        property_id = vals.get("property_id")
+        pro = self.env["estate.property"].browse(property_id)
+
+        min_offer_price = min(pro.offer_ids.mapped("price"))
+        if float_compare(vals["price"], min_offer_price, precision_digits=2) < 0:
+            raise ValidationError("New offer price can not be lower than existing ones!")
+
+        pro.state = "received"
+
+        return super().create(vals)
 
     def _inverse_deadline(self):
         for record in self:
