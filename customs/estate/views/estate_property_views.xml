@@ -11,8 +11,8 @@
     <field name="name">estate.property.tree</field>
     <field name="model">estate.property</field>
     <field name="arch" type="xml">
-      <tree decoration-success="state in ('received','accepted')" 
-      decoration-bf="state == 'accepted'" decoration-muted="state == 'sold'" >
+      <tree decoration-success="state in ('received','accepted')"
+        decoration-bf="state == 'accepted'" decoration-muted="state == 'sold'">
         <field name="name" />
         <field name="postcode" />
         <field name="bedrooms" />
@@ -22,7 +22,7 @@
         <field name="expected_price" />
         <field name="selling_price" />
         <field name="date_availability" string="Available From" optional="hide" />
-        <field name="state" invisible="1"/>
+        <field name="state" invisible="1" />
       </tree>
     </field>
   </record>
@@ -69,7 +69,7 @@
                 <field name="facades" />
                 <field name="living_area" />
                 <field name="total_area" />
-                <field name="garage" string="Garden"/>
+                <field name="garage" string="Garden" />
               </group>
               <group string="Garden info" attrs="{'invisible': [('garage', '=',False)]}">
                 <field name="gardern_area" string="Garden Area(sqm)" />
@@ -78,7 +78,8 @@
             </page>
             <page string="Offers">
               <group>
-                <field name="offer_ids" string="" editable="true" attrs="{'readonly': [('state','in',['accepted','canceled','sold'])]}" />
+                <field name="offer_ids" string="" editable="true"
+                  attrs="{'readonly': [('state','in',['accepted','canceled','sold'])]}" />
               </group>
             </page>
             <page string="Other Info">
@@ -104,6 +105,8 @@
         <field name="expected_price" />
         <field name="bedrooms" />
         <field name="facades" />
+        <field name="living_area" string="Living area" 
+        filter_domain="[('living_area', '&gt;=', self)]" />
 
         <filter string="Available" name="property_available"
           domain="['|',('state','=','new'),('state','=','received')]" />
