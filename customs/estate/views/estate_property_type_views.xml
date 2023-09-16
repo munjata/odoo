@@ -7,6 +7,16 @@
     <field name="view_mode">tree,form</field>
   </record>
 
+  <record model="ir.ui.view" id="estate_property_type_view_tree">
+    <field name="name">estate.property.type.tree</field>
+    <field name="model">estate.property.type</field>
+    <field name="arch" type="xml">
+      <tree string="Types">
+        <field name="sequence" widget="handle"/>
+        <field name="name" />        
+      </tree>
+    </field>
+  </record>
     <record model="ir.ui.view" id="estate_property_type_view_form">
       <field name="name">estate.property.type.form</field>
       <field name="model">estate.property.type</field>
