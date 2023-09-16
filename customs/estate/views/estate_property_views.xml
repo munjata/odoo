@@ -30,9 +30,13 @@
     <field name="arch" type="xml">
       <form string="Property Create">
         <header>
-          <button name="action_sold_property" type="object" string="Sold" />
-          <button name="action_cancel_property" type="object" string="Cancel" />
-          <field name="state" widget="statusbar"/>
+          <!-- <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': ['|',
+          ('state', 'not in', ['draft', 'sent','sale']), ('id', '=', False)]}" data-hotkey="z"/> -->
+          <button name="action_sold_property" type="object" string="Sold"
+            attrs="{'invisible': [('state','in',['new', 'canceled'])]}" />
+          <button name="action_cancel_property" type="object" string="Cancel"
+            attrs="{'invisible': [('state','!=','accepted')]}" />
+          <field name="state" widget="statusbar" />
         </header>
         <sheet>
           <div class="oe_title">
@@ -42,8 +46,9 @@
           </div>
           <group>
             <group>
-              <field name="tag_ids" widget="many2many_tags"  options="{'color_field': 'color'}" />
-              <field name="property_type_id" options="{'no_quick_create':True,'no_create_edit': True}" />
+              <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
+              <field name="property_type_id"
+                options="{'no_quick_create':True,'no_create_edit': True}" />
               <field name="postcode" />
               <field name="expected_price" />
               <field name="best_price" string="Best Offer" />
@@ -60,15 +65,17 @@
                 <field name="bedrooms" />
                 <field name="facades" />
                 <field name="living_area" />
-                <field name="garage" />
-                <field name="gardern_area" string="Garden Area(sqm)" />
                 <field name="total_area" />
+                <field name="garage" string="Garden"/>
+              </group>
+              <group string="Garden info" attrs="{'invisible': [('garage', '=',False)]}">
+                <field name="gardern_area" string="Garden Area(sqm)" />
                 <field name="gardern_orientation" string="Garden Orientation" />
               </group>
             </page>
             <page string="Offers">
               <group>
-                <field name="offer_ids" string=""/>
+                <field name="offer_ids" string="" />
               </group>
             </page>
             <page string="Other Info">
