@@ -19,7 +19,7 @@
         <field name="total_area" />
         <field name="expected_price" />
         <field name="selling_price" />
-        <field name="date_availability" string="Available From" />
+        <field name="date_availability" string="Available From" optional="hide" />
       </tree>
     </field>
   </record>
